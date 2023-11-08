@@ -58,5 +58,37 @@ token_meta_username    cloud_user
 
 vault auth enable github
 
+vault auth list
+
+# OUTPUT
+Path         Type        Accessor                  Description                Version
+----         ----        --------                  -----------                -------
+github/      github      auth_github_461fa050      n/a                        n/a
+token/       token       auth_token_2f591f86       token based credentials    n/a
+userpass/    userpass    auth_userpass_d80bec1f    n/a                        n/a
+
+
+vault write auth/github/config organization=Code-Mountains
+
+# OUTPUT
+Success! Data written to: auth/github/config
+
+
+vault write auth/github/map/teams/development value=dev-policy
+
+# OUTPUT 
+Success! Data written to: auth/github/map/teams/development
+
+
+
+vault write auth/github/map/users/thecodemountains value=user-policy 
+
+# OUTPUT 
+Success! Data written to: auth/github/map/users/thecodemountains
+
+
+
+
+
 
 ```
