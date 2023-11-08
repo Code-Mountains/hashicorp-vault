@@ -1,0 +1,8 @@
+{
+	"policies": ["root"],
+	"meta": {
+		"user": "test-user"
+	},
+	"ttl": "1h",
+	"renewable": true
+}
