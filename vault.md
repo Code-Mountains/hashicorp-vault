@@ -56,6 +56,7 @@ token_meta_username    cloud_user
 
 
 
+vault auth enable github
 
 
 ```
