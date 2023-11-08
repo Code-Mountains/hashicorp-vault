@@ -1,0 +1,18 @@
+[Unit]
+Description=Consul
+Documentation=https://www.consul.io/
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+User=consul
+Group=consul
+ExecStart=/usr/bin/consul agent -server -ui -data-dir=/var/consul -bootstrap-expect=1 -node=vault -bind=192.168.0.20 -config-dir=/etc/consul.d/
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
+
