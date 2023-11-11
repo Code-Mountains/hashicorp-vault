@@ -288,9 +288,28 @@ HA Mode                standby
 Active Node Address    <none>
 
 
-# VAULT STUFF
+# Check which ports are actively listening
+ss -tuln | grep -E ':(80|443|8081|8080|8443|3000)\>'
+netstat -tuln | grep -E ':(80|443|8081|8080|8443|3000)\>'
+
+## OUTPUT 
+
+ss -tuln | grep -E ':(80|443|8081|8080|8443|3000)\>'
+tcp   LISTEN 0      511                             0.0.0.0:80         0.0.0.0:*          
+tcp   LISTEN 0      511                             0.0.0.0:443        0.0.0.0:*          
+tcp   LISTEN 0      4096                          127.0.0.1:8443       0.0.0.0:*          
+tcp   LISTEN 0      4096                          127.0.0.1:8081       0.0.0.0:*          
+tcp   LISTEN 0      511                                   *:3000             *:*    
 
 
+## OUTPUT 
+
+netstat -tuln | grep -E ':(80|443|8081|8080|8443|3000)\>'
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:443             0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.1:8443          0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.1:8081          0.0.0.0:*               LISTEN     
+tcp6       0      0 :::3000                 :::*                    LISTEN     
 
 
 ```
