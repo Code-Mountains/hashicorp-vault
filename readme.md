@@ -36,7 +36,7 @@ sudo vim /etc/consul.d/ui.json
 
 {
         "addresses" : {
-                "http": "0.0.0.0"
+                "http": "0.0.0.0:8080"
         }       
 }  
 
@@ -155,12 +155,15 @@ storage "consul" {
 	path = "vault/" 
 }
 listener "tcp" {
-	address = "0.0.0.0:443"
+	address = "0.0.0.0:8443"
 	tls_disable = 0
 	tls_cert_file = "/etc/letsencrypt/live/ub22.thecodemountains.com/fullchain.pem"
 	tls_key_file = "/etc/letsencrypt/live/ub22.thecodemountains.com/privkey.pem"
 }
 ui = true
+
+
+
 
 
 sudo vim /etc/systemd/system/vault.service 

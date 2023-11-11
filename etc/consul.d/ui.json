@@ -1,6 +1,9 @@
 {
-        "addresses" : {
-                "http": "0.0.0.0"
-        }
+    "addresses": {
+        "http": "0.0.0.0"
+    },
+    "ports": {
+        "http": 8081
+    }
 }
 
