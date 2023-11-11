@@ -20,8 +20,8 @@ After=network-online.target
 [Service]
 User=consul
 Group=consul
-ExecStart=/usr/bin/consul agent -server -ui -data-dir=/var/consul -bootstrap-expect=1 -node=vault -bind=192.168.0.20 -config-dir=/etc/consul.d/
-ExecReload=/bin/kill -HUP $MAINPID 
+ExecStart=/usr/bin/consul agent -server -ui -data-dir=/var/consul -bootstrap-expect=1 -node=vault -bind=127.0.0.1 -config-dir=/etc/consul.d/
+ExecReload=/bin/kill -HUP $MAINPID
 KillMode=process
 Restart=on-failure
 LimitNOFILE=65536
@@ -30,15 +30,22 @@ LimitNOFILE=65536
 WantedBy=multi-user.target
 
 
+
+
 sudo mkdir /etc/consul.d
 
 sudo vim /etc/consul.d/ui.json 
 
 {
-        "addresses" : {
-                "http": "0.0.0.0:8080"
-        }       
-}  
+    "addresses": {
+        "http": "127.0.0.1"
+    },
+    "ports": {
+        "http": 8081
+    }
+}
+
+
 
 sudo systemctl daemon-reload 
 
@@ -84,7 +91,12 @@ wget https://releases.hashicorp.com/consul/1.12.0/consul_1.12.0_linux_amd64.zip
 sudo apt install unzip
 
 unzip consul_<VERSION>_linux_amd64.zip
+unzip consul_1.12.0_linux_amd64.zip 
 sudo mv consul /usr/local/bin/
+
+sudo cp /usr/local/bin/consul /usr/local/consul
+sudo cp /usr/local/bin/consul /usr/bin/consul
+
 consul --version
 
 sudo useradd --system --home /etc/consul.d --shell /bin/false consul
@@ -183,7 +195,7 @@ WantedBy=multi-user.target
 
 sudo systemctl daemon-reload
 
-export VAULT_ADDR="https://ub22.thecodemountains.com:443"
+export VAULT_ADDR="https://vault.thecodemountains.com"
 
 vault -autocomplete-install
 
@@ -196,14 +208,13 @@ sudo systemctl enable vault
 
 vault operator init 
 
-sysadmin@ub22:/etc/vault $ vault operator init
-Unseal Key 1: rgxHPkNP8GaUZOKVTn0MCUgCquV9glWy0IBg1FJI1Ftr
-Unseal Key 2: Vxej6KfXDZJtyi4q7HVZ7vYELLzBi8r/X1pQfD8u9VEe
-Unseal Key 3: eHoczjJlzTKAzKaSykLtIaPkOSapmIvoHN6kdzjWAdBK
-Unseal Key 4: +m0HmE1ultzQgfEHAG4OVXU6moS6FcuY+eDVpOwOQ3Md
-Unseal Key 5: 7gFJNC4tsRt4r2ObyemQfSv2SvKVursU+jKhjvmMnZko
+Unseal Key 1: Uj77x5+BEOZUfE7mgt0CzqbvCg5jtRNTDPh/Hoa7GWcM
+Unseal Key 2: 4ulBGItfMCkWJvKtRj0AUurT7Uk97fJeENuei14fYxTq
+Unseal Key 3: hbZv9Ag5naQFP6Q0meuPRVUIGB4VxyutdFQkBdSaWOEK
+Unseal Key 4: S0DMwsQdvqQyoORAW+gAohU/jzZVvTHyFmbq9w4MtBbp
+Unseal Key 5: OtIlRqSLZYEWNvkCAGGbVIBaxpzb6wKP7rVv049Uf4yN
 
-Initial Root Token: hvs.y07dNHnLax1Tbtnjc2OVQrs6
+Initial Root Token: hvs.y4Cc2BveEqCGW93wGbrAeYrn
 
 Vault initialized with 5 key shares and a key threshold of 3. Please securely
 distribute the key shares printed above. When the Vault is re-sealed,
@@ -216,16 +227,15 @@ reconstruct the root key, Vault will remain permanently sealed!
 It is possible to generate new unseal keys, provided you have a quorum of
 existing unseal keys shares. See "vault operator rekey" for more information.
 
-
 # If vault is already initialized, remove existing config and re-initialize as new
 consul kv delete -recurse vault/
 
 
-vault operator unseal rgxHPkNP8GaUZOKVTn0MCUgCquV9glWy0IBg1FJI1Ftr
+vault operator unseal Uj77x5+BEOZUfE7mgt0CzqbvCg5jtRNTDPh/Hoa7GWcM
 
-vault operator unseal eHoczjJlzTKAzKaSykLtIaPkOSapmIvoHN6kdzjWAdBK
+vault operator unseal hbZv9Ag5naQFP6Q0meuPRVUIGB4VxyutdFQkBdSaWOEK
 
-vault operator unseal 7gFJNC4tsRt4r2ObyemQfSv2SvKVursU+jKhjvmMnZko
+vault operator unseal OtIlRqSLZYEWNvkCAGGbVIBaxpzb6wKP7rVv049Uf4yN
 
 # OUTPUT 
 sysadmin@ub22:/etc/consul.d $ vault operator unseal hDI4kxTVfoB3idJvAGm+r5lGzzuDVjLkJAMN30w6Zbsu
