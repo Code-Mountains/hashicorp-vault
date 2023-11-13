@@ -28,7 +28,7 @@ jobs:
 
       - name: Unseal Vault
         run: |
-          VAULT_ADDR='https://vault.thecodemountains.com:8443'
+          # VAULT_ADDR='https://vault.thecodemountains.com:8443'
           echo $VAULT_ADDR
 
           vault operator unseal Uj77x5+BEOZUfE7mgt0CzqbvCg5jtRNTDPh/Hoa7GWcM
