@@ -15,9 +15,9 @@ jobs:
     - name: Check out repository code
       uses: actions/checkout@v2
 
-    - name: Deploy node.js app via pm2 
+    - name: Redeploy Vault using Nginx 
       run: |
-        # Restart our Fruitfall Node.js app using PM2
+        # Restart our Vault service and Nginx
         echo "Restarting Vault service, Nginx web server and reverse proxy"        
         sudo systemctl daemon-reload 
         sudo systemctl restart vault 
