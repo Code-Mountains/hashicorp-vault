@@ -87,7 +87,30 @@ vault write auth/github/map/users/thecodemountains value=user-policy
 Success! Data written to: auth/github/map/users/thecodemountains
 
 
+# Enabling CORS in Vault
 
+## Enable CORS and Set Allowed Origins:
+vault write sys/config/cors enabled=true allowed_origins=https://vault.thecodemountains.com
+vault write sys/config/cors enabled=true allowed_origins=https://vault.thecodemountains.com
+ # Wildcard domain not recommended for production 
+# vault write sys/config/cors enabled=true allowed_origins=*
+
+# Verify CORS status
+vault read sys/config/cors
+
+## OUTPUT 
+
+vault write sys/config/cors enabled=true allowed_origins=https://vault.thecodemountains.com
+
+Success! Data written to: sys/config/cors
+
+vault read sys/config/cors
+
+Key                Value
+---                -----
+allowed_headers    [Content-Type X-Requested-With X-Vault-AWS-IAM-Server-ID X-Vault-MFA X-Vault-No-Request-Forwarding X-Vault-Wrap-Format X-Vault-Wrap-TTL X-Vault-Policy-Override Authorization X-Vault-Token]
+allowed_origins    [https://vault.thecodemountains.com]
+enabled            true
 
 
 
