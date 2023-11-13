@@ -18,6 +18,10 @@ jobs:
     - name: Debug 
       run: |
         whoami
+        echo $VAULT_ADDR 
+        echo "Dot sourcing user bash profile for environment variables"
+        source /home/sysadmin/.bashrc
+        echo $VAULT_ADDR 
         hostnamectl 
         vault status 
         whereis vault
