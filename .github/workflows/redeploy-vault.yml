@@ -7,7 +7,7 @@ on:
     branches: ["main"]
 
 jobs:
-  deploy_fruitfall_nodejs_app:
+  redeploy_vault:
     runs-on: ["self-hosted","ub22"]  
 
     steps:
