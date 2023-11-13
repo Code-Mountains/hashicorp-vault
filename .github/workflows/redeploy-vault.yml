@@ -14,8 +14,8 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
-      # - name: Setup Vault Address
-      #   run: echo "VAULT_ADDR=${{ secrets.VAULT_ADDR }}" >> $GITHUB_ENV
+      - name: Setup Vault Address
+        run: echo "VAULT_ADDR=${{ secrets.VAULT_ADDR }}" >> $GITHUB_ENV
 
       - name: Redeploy Vault using Nginx
         run: |
