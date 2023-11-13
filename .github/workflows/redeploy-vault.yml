@@ -15,6 +15,13 @@ jobs:
     - name: Check out repository code
       uses: actions/checkout@v2
 
+    - name: Debug 
+      run: |
+        whoami
+        hostnamectl 
+        vault status 
+        whereis vault
+
     - name: Redeploy Vault using Nginx 
       run: |
         # Restart our Vault service and Nginx
