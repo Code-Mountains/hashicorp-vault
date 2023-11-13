@@ -22,13 +22,6 @@ jobs:
       run: |
         whoami
         echo $VAULT_ADDR 
-        echo "Dot sourcing user bash profile for environment variables"
-        source /home/sysadmin/.bashrc
-        echo $VAULT_ADDR 
-        hostnamectl 
-        echo "Vault Address: $VAULT_ADDR" 
-        vault status 
-        whereis vault
 
     - name: Redeploy Vault using Nginx 
       run: |
