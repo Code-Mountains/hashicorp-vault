@@ -23,7 +23,7 @@ jobs:
         VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
       run: |
         whoami
-        echo "$VAULT_ADDR
+        echo "$VAULT_ADDR"
         VAULT_ADDR="$VAULT_ADDR"
         echo $VAULT_ADDR
 
