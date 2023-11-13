@@ -1,0 +1,28 @@
+name: Redeploy HashiCorp Vault service
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  deploy_fruitfall_nodejs_app:
+    runs-on: ["self-hosted","ub22"]  
+
+    steps:
+
+    - name: Check out repository code
+      uses: actions/checkout@v2
+
+    - name: Deploy node.js app via pm2 
+      run: |
+        # Restart our Fruitfall Node.js app using PM2
+        echo "Restarting Vault service, Nginx web server and reverse proxy"        
+        sudo systemctl daemon-reload 
+        sudo systemctl restart vault 
+        echo "SUCCESS: services restart successfully!"        
+        sudo systemctl restart nginx
+        sudo systemctl status vault
+        sudo systemctl status nginx
+        
