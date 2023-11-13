@@ -17,29 +17,15 @@ jobs:
       - name: Setup Vault Address
         run: echo "VAULT_ADDR=${{ secrets.VAULT_ADDR }}" >> $GITHUB_ENV
 
-      # - name: Debug
-      #   env:
-      #     VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
-      #   run: |
-      #     whoami
-      #     echo $VAULT_ADDR
-      #     VAULT_ADDR=$VAULT_ADDR
-      #     echo $VAULT_ADDR
-      #     vault status
-
       - name: Redeploy Vault using Nginx
         run: |
           # Restart our Vault service and Nginx
           echo "Restarting Vault service, Nginx web server and reverse proxy"        
           sudo systemctl daemon-reload 
-          sudo systemctl restart vault 
-          echo "SUCCESS: services restart successfully!"        
+          sudo systemctl restart vault        
           sudo systemctl restart nginx
-          sudo systemctl status vault
-          sudo systemctl status nginx
+
       - name: Unseal Vault
-        # env:
-        #     VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
         run: |
           VAULT_ADDR='https://vault.thecodemountains.com:8443'
           echo $VAULT_ADDR
@@ -47,5 +33,6 @@ jobs:
           vault operator unseal Uj77x5+BEOZUfE7mgt0CzqbvCg5jtRNTDPh/Hoa7GWcM
           vault operator unseal hbZv9Ag5naQFP6Q0meuPRVUIGB4VxyutdFQkBdSaWOEK
           vault operator unseal OtIlRqSLZYEWNvkCAGGbVIBaxpzb6wKP7rVv049Uf4yN
+          
           echo "SUCCESS: Vautl unsealed successfully"
           vault status
