@@ -15,6 +15,9 @@ jobs:
     - name: Check out repository code
       uses: actions/checkout@v2
 
+    - name: Setup Vault Address
+      run: echo "VAULT_ADDR=${{ secrets.VAULT_ADDR }}" >> $GITHUB_ENV
+
     - name: Debug 
       run: |
         whoami
@@ -23,6 +26,7 @@ jobs:
         source /home/sysadmin/.bashrc
         echo $VAULT_ADDR 
         hostnamectl 
+        echo "Vault Address: $VAULT_ADDR" 
         vault status 
         whereis vault
 
