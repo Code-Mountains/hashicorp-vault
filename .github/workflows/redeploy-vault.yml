@@ -23,8 +23,8 @@ jobs:
         VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
       run: |
         whoami
-        echo "$VAULT_ADDR"
-        VAULT_ADDR="$VAULT_ADDR"
+        echo $VAULT_ADDR
+        VAULT_ADDR=$VAULT_ADDR
         echo $VAULT_ADDR
         vault status
 
@@ -43,7 +43,8 @@ jobs:
       env: 
           VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
       run: |
-        VAULT_ADDR="$VAULT_ADDR"
+        VAULT_ADDR=$VAULT_ADDR
+        
         vault operator unseal Uj77x5+BEOZUfE7mgt0CzqbvCg5jtRNTDPh/Hoa7GWcM
         vault operator unseal hbZv9Ag5naQFP6Q0meuPRVUIGB4VxyutdFQkBdSaWOEK
         vault operator unseal OtIlRqSLZYEWNvkCAGGbVIBaxpzb6wKP7rVv049Uf4yN
