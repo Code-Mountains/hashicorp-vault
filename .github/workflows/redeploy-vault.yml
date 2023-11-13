@@ -14,8 +14,8 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
-      - name: Setup Vault Address
-        run: echo "VAULT_ADDR=${{ secrets.VAULT_ADDR }}" >> $GITHUB_ENV
+      # - name: Setup Vault Address
+      #   run: echo "VAULT_ADDR=${{ secrets.VAULT_ADDR }}" >> $GITHUB_ENV
 
       - name: Redeploy Vault using Nginx
         run: |
@@ -24,6 +24,7 @@ jobs:
           sudo systemctl daemon-reload 
           sudo systemctl restart vault        
           sudo systemctl restart nginx
+          echo "SUCCESS: Services restarted."        
 
       - name: Unseal Vault
         run: |
@@ -33,6 +34,6 @@ jobs:
           vault operator unseal Uj77x5+BEOZUfE7mgt0CzqbvCg5jtRNTDPh/Hoa7GWcM
           vault operator unseal hbZv9Ag5naQFP6Q0meuPRVUIGB4VxyutdFQkBdSaWOEK
           vault operator unseal OtIlRqSLZYEWNvkCAGGbVIBaxpzb6wKP7rVv049Uf4yN
-          
-          echo "SUCCESS: Vautl unsealed successfully"
+
+          echo "SUCCESS: Vault unsealed successfully"
           vault status
