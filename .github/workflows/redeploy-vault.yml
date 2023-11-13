@@ -26,6 +26,7 @@ jobs:
         echo "$VAULT_ADDR"
         VAULT_ADDR="$VAULT_ADDR"
         echo $VAULT_ADDR
+        vault status
 
     - name: Redeploy Vault using Nginx 
       run: |
@@ -39,10 +40,10 @@ jobs:
         sudo systemctl status nginx
 
     - name: Unseal Vault 
+      env: 
+          VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
       run: |
-        echo "Dot sourcing user bash profile for environment variables"
-        source /home/sysadmin/.bashrc
-        
+        VAULT_ADDR="$VAULT_ADDR"
         vault operator unseal Uj77x5+BEOZUfE7mgt0CzqbvCg5jtRNTDPh/Hoa7GWcM
         vault operator unseal hbZv9Ag5naQFP6Q0meuPRVUIGB4VxyutdFQkBdSaWOEK
         vault operator unseal OtIlRqSLZYEWNvkCAGGbVIBaxpzb6wKP7rVv049Uf4yN
