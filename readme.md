@@ -2,14 +2,16 @@
 ```
 sudo crontab -e 
 
-@reboot curl -X POST -H "Accept: application/vnd.github.everest-preview+json" -H "Authorization: token YOUR_PERSONAL_ACCESS_TOKEN" --data '{"event_type": "boot-event"}' https://api.github.com/repos/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/dispatches
+@reboot (ping -c 4 github.com && curl -X POST -H "Accept: application/vnd.github.everest-preview+json" -H "Authorization: token YOUR_PERSONAL_ACCESS_TOKEN" --data '{"event_type": "boot-event"}' https://api.github.com/repos/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/dispatches) >/dev/null 2>&1
+
 
 
 $ sudo cat /var/spool/cron/crontabs/root
 
 ... 
 
-@reboot curl -X POST -H "Accept: application/vnd.github.everest-preview+json" -H "Authorization: token YOUR_PERSONAL_ACCESS_TOKEN" --data '{"event_type": "boot-event"}' https://api.github.com/repos/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/dispatches
+@reboot (ping -c 4 github.com && curl -X POST -H "Accept: application/vnd.github.everest-preview+json" -H "Authorization: token YOUR_PERSONAL_ACCESS_TOKEN" --data '{"event_type": "boot-event"}' https://api.github.com/repos/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/dispatches) >/dev/null 2>&1
+
 
 ```
 
