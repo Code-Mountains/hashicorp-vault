@@ -74,7 +74,7 @@ vault write auth/github/config organization=Code-Mountains
 Success! Data written to: auth/github/config
 
 
-vault write auth/github/map/teams/development value=dev-policy
+vault write auth/github/map/teams/Scrum value=dev-policy
 
 # OUTPUT 
 Success! Data written to: auth/github/map/teams/development
