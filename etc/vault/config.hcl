@@ -1,8 +1,3 @@
-cors {
-        enabled = true 
-        allowed_origins = ["https://vault.codemountains.com"]
-}
-
 storage "consul" {
         address = "127.0.0.1:8081"
         path = "vault/"

@@ -1,0 +1,70 @@
+name: Reinitialize Vault cluster from Scratch 
+
+on: 
+  workflow_dispatch:
+    inputs:
+      logLevel: 
+        description: 'Log level'
+        required: true 
+        default: 'warning'
+
+jobs:
+  reinitialize_vault:        
+    runs-on: ["self-hosted", "ub22"]
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Stop Vault & Consul Services 
+        run: |
+          sudo systemctl stop vault
+          sudo systemctl stop consul
+
+      - name: Clear Vault & Consul Config
+        run: |
+          sudo rm -rf /etc/vault/config.hcl 
+          sudo rm -rf /etc/consul.d/*
+          sudo rm -rf /var/consul/*
+
+      - name: Configure Vault & Consul
+        run: |
+          sudo bash -c 'cat << EOF > /etc/vault/config.hcl
+          storage "consul" {
+                  address = "127.0.0.1:8081"
+                  path = "vault/"
+          }
+          listener "tcp" {
+                  address = "0.0.0.0:8443"
+                  tls_disable = 0
+                  tls_cert_file = "/etc/letsencrypt/live/vault.thecodemountains.com/fullchain.pem"
+                  tls_key_file = "/etc/letsencrypt/live/vault.thecodemountains.com/privkey.pem"
+          }
+          ui = true
+          EOF'
+
+          sudo bash -c 'cat << EOF > /etc/consul.d/ui.json 
+          {
+              "addresses": {
+                  "http": "127.0.0.1"
+              },
+              "ports": {
+                  "http": 8081
+              }
+          }
+          EOF' 
+
+      - name: Start Vault & Consul 
+        run: |
+          # Restart our Vault & Consul services along with and Nginx
+          echo "Restarting Vault service, Nginx web server and reverse proxy"        
+          sudo systemctl daemon-reload 
+          sudo systemctl restart vault        
+          sudo systemctl restart consul      
+          sudo systemctl restart nginx
+          echo "SUCCESS: Services restarted."  
+
+
+          
+          
+

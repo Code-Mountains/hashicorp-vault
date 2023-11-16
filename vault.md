@@ -115,3 +115,21 @@ enabled            true
 
 
 ```
+
+
+# Disabling CORS 
+```
+
+vault write sys/config/cors allowed_origins="http://dummy"
+vault write sys/config/cors enabled=false
+vault write sys/config/cors allowed_origins=
+
+
+
+vault write sys/config/cors enabled=false
+vault write sys/config/cors allowed_origins=
+
+
+
+
+```
