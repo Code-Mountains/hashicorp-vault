@@ -1,3 +1,12 @@
+# Create CI Secret Store using kv2
+```
+vault secrets enable -path=ci/kvv2 -description="CI secret store" -version=2 kv
+
+
+```
+
+
+
 ```
 
 vault token create
