@@ -1,3 +1,19 @@
+# Setup Crontab on Ubuntu runner to trigger workflow every time machine starts up 
+```
+sudo crontab -e 
+
+@reboot curl -X POST -H "Accept: application/vnd.github.everest-preview+json" -H "Authorization: token YOUR_PERSONAL_ACCESS_TOKEN" --data '{"event_type": "boot-event"}' https://api.github.com/repos/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/dispatches
+
+
+$ sudo cat /var/spool/cron/crontabs/root
+
+... 
+
+@reboot curl -X POST -H "Accept: application/vnd.github.everest-preview+json" -H "Authorization: token YOUR_PERSONAL_ACCESS_TOKEN" --data '{"event_type": "boot-event"}' https://api.github.com/repos/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/dispatches
+
+```
+
+
 ```
 
 wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
