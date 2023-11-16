@@ -201,7 +201,7 @@ vault -autocomplete-install
 
 complete -C /usr/bin/vault vault 
 
-sudo systemctl start vault 
+sudo systemctl start vault  
 
 sudo systemctl enable vault 
 
