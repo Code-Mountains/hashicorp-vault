@@ -37,9 +37,9 @@ jobs:
           VAULT_ADDR='https://vault.thecodemountains.com:8443'
           echo $VAULT_ADDR
 
-          vault operator unseal Uj77x5+BEOZUfE7mgt0CzqbvCg5jtRNTDPh/Hoa7GWcM
-          vault operator unseal hbZv9Ag5naQFP6Q0meuPRVUIGB4VxyutdFQkBdSaWOEK
-          vault operator unseal OtIlRqSLZYEWNvkCAGGbVIBaxpzb6wKP7rVv049Uf4yN
+          vault operator unseal 3cqfflastAvaefmkxtKf/Z8MN/64zgXj6YjFRg+QVIhC
+          vault operator unseal TaRPcXBpNruJWJKFJJ5ShpCfQMBVj2vltRK4t38fTOeS
+          vault operator unseal HkGw2PZM1ZjfSNZiUJGQJlj+pwsbBbwhArpr4DHYEqDJ
 
           echo "SUCCESS: Vault unsealed successfully"
           vault status

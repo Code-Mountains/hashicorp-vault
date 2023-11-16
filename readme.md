@@ -27,7 +27,7 @@ sudo apt update && sudo apt install consul
 
 consul version 
 
-sudo vim /etc/systemd/system/consul.service 
+sudo vim c
 
 [Unit]
 Description=Consul
@@ -224,15 +224,14 @@ sudo systemctl start vault
 sudo systemctl enable vault 
 
 
-vault operator init 
+vault operator init
+Unseal Key 1: 3cqfflastAvaefmkxtKf/Z8MN/64zgXj6YjFRg+QVIhC
+Unseal Key 2: JRmZWB8glA3DKdJSAmAXa8w3huaFn2flNvH6q/M9yB8m
+Unseal Key 3: TaRPcXBpNruJWJKFJJ5ShpCfQMBVj2vltRK4t38fTOeS
+Unseal Key 4: VUYrvVvmOBK1tO6Kv9td2A+sDnLRbZFnPMcG+HV9H/5e
+Unseal Key 5: HkGw2PZM1ZjfSNZiUJGQJlj+pwsbBbwhArpr4DHYEqDJ
 
-Unseal Key 1: Uj77x5+BEOZUfE7mgt0CzqbvCg5jtRNTDPh/Hoa7GWcM
-Unseal Key 2: 4ulBGItfMCkWJvKtRj0AUurT7Uk97fJeENuei14fYxTq
-Unseal Key 3: hbZv9Ag5naQFP6Q0meuPRVUIGB4VxyutdFQkBdSaWOEK
-Unseal Key 4: S0DMwsQdvqQyoORAW+gAohU/jzZVvTHyFmbq9w4MtBbp
-Unseal Key 5: OtIlRqSLZYEWNvkCAGGbVIBaxpzb6wKP7rVv049Uf4yN
-
-Initial Root Token: hvs.y4Cc2BveEqCGW93wGbrAeYrn
+Initial Root Token: hvs.rq3UBmVuoMZKcR9BsIprX8Uk
 
 Vault initialized with 5 key shares and a key threshold of 3. Please securely
 distribute the key shares printed above. When the Vault is re-sealed,
@@ -245,15 +244,17 @@ reconstruct the root key, Vault will remain permanently sealed!
 It is possible to generate new unseal keys, provided you have a quorum of
 existing unseal keys shares. See "vault operator rekey" for more information.
 
+
+
 # If vault is already initialized, remove existing config and re-initialize as new
 consul kv delete -recurse vault/
 
 
-vault operator unseal Uj77x5+BEOZUfE7mgt0CzqbvCg5jtRNTDPh/Hoa7GWcM
+vault operator unseal 3cqfflastAvaefmkxtKf/Z8MN/64zgXj6YjFRg+QVIhC
 
-vault operator unseal hbZv9Ag5naQFP6Q0meuPRVUIGB4VxyutdFQkBdSaWOEK
+vault operator unseal TaRPcXBpNruJWJKFJJ5ShpCfQMBVj2vltRK4t38fTOeS
 
-vault operator unseal OtIlRqSLZYEWNvkCAGGbVIBaxpzb6wKP7rVv049Uf4yN
+vault operator unseal HkGw2PZM1ZjfSNZiUJGQJlj+pwsbBbwhArpr4DHYEqDJ
 
 # OUTPUT 
 sysadmin@ub22:/etc/consul.d $ vault operator unseal hDI4kxTVfoB3idJvAGm+r5lGzzuDVjLkJAMN30w6Zbsu
