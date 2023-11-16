@@ -1,6 +1,12 @@
 name: External Trigger When Server Starts 
 
 on: 
+  workflow_dispatch:
+    inputs:
+      logLevel: 
+        description: 'Log level'
+        required: true 
+        default: 'warning'
   repository_dispatch:
     types: [boot-event]
 
