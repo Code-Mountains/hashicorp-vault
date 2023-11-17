@@ -103,3 +103,47 @@ vault-ssh-helper -verify-only -config /etc/vault-ssh-helper.d/config.hcl
 2023/11/17 13:47:44 [INFO] using namespace: 
 2023/11/17 13:47:44 [INFO] vault-ssh-helper verification successful!
 ```
+
+# Login using User Pass 
+```
+vault login -method=userpass username=codemountains password="CodeMountains2023$"
+
+
+Success! You are now authenticated. The token information displayed below
+is already stored in the token helper. You do NOT need to run "vault login"
+again. Future Vault requests will automatically use this token.
+
+Key                    Value
+---                    -----
+token                  hvs.CAESIF7jQU6LKbckl8kdSGbKiaH9aBFEZP5B0iODIJcTpvDtGh4KHGh2cy40U2pDeTBDV1Z0QXRWMTgzcFpmZDBWOWI
+token_accessor         xMkdsIsW75WniCGyu5koNxwj
+token_duration         768h
+token_renewable        true
+token_policies         ["default" "ssh-policy"]
+identity_policies      []
+policies               ["default" "ssh-policy"]
+token_meta_username    codemountains
+```
+
+# Create Home Directory
+```
+sudo mkdir /home/ssh_user
+sudo chown ssh_user:ssh_user /home/ssh_user
+```
+
+# Tie IP with SSH Role
+```
+vault write ssh/creds/otp_role ip=192.168.0.20
+
+## OUTPUT:
+Key                Value
+---                -----
+lease_id           ssh/creds/otp_role/s5ztk5eND8PDEGcbjNwytMUC
+lease_duration     768h
+lease_renewable    false
+ip                 192.168.0.20
+key                bc4031cc-0f2b-b21f-6fcc-e7599e908e90
+key_type           otp
+port               22
+username           sysadmin
+```
